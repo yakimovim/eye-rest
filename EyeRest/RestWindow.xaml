@@ -1,0 +1,24 @@
+﻿<Window x:Class="EyeRest.RestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True"
+        Icon="Images/MainIcon.ico"
+        Title="Отдохните от работы" Height="150" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ProgressBar Grid.Row="0" Minimum="0" Maximum="{Binding TotalSeconds}" Value="{Binding Seconds, Mode=OneWay}"
+                     Margin="5" Height="30">
+        </ProgressBar>
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBlock Margin="2" Text="{Binding SecondsToEnd}" />
+            <TextBlock Margin="2">секунд до конца</TextBlock>
+        </StackPanel>
+        <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Width="200" Height="30" Margin="10" Command="{Binding CancelCommand}">
+            Отмена
+        </Button>
+    </Grid>
+</Window>
