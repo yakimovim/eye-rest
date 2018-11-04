@@ -9,8 +9,7 @@ namespace EyeRest
         {
             InitializeComponent();
 
-            var viewModel = new SettingsViewModel(this);
-            this.DataContext = viewModel;
+            DataContext = new SettingsViewModel(this);
         }
     }
 }

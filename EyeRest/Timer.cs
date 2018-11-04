@@ -10,7 +10,7 @@ namespace EyeRest
 
         public Timer()
         {
-            m_TimerState = new WorkState(EyeRest.Properties.Settings.Default.WorkTime);
+            m_TimerState = new WorkState(Properties.Settings.Default.WorkTime);
             m_TimerState.NewStateGenerated += OnNewStateGenerated;
 
             m_Timer = new DispatcherTimer();

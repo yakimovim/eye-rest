@@ -104,7 +104,7 @@ namespace EyeRest
 
         protected override void OnEnd()
         {
-            var newState = new RestState(EyeRest.Properties.Settings.Default.RestTime);
+            var newState = new RestState(Properties.Settings.Default.RestTime);
 
             OnNewStateGenerated(newState);
         }

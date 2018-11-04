@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True"
         Icon="Images/MainIcon.ico"
-        Title="Отдохните от работы" Height="150" Width="400">
+        Title="Отдохните от работы" Height="150" Width="400" KeyDown="OnKeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

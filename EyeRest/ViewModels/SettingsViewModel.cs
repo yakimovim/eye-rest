@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.Windows.Input;
 
@@ -16,7 +13,7 @@ namespace EyeRest.ViewModels
 
         public SettingsViewModel(SettingsWindow window) : base(window)
         {
-            var settings = EyeRest.Properties.Settings.Default;
+            var settings = Properties.Settings.Default;
 
             m_WorkTimeMinutes = settings.WorkTime.Minutes;
             m_WorkTimeSeconds = settings.WorkTime.Seconds;
@@ -108,7 +105,7 @@ namespace EyeRest.ViewModels
             {
                 return new RelayCommand(delegate
                 {
-                    var settings = EyeRest.Properties.Settings.Default;
+                    var settings = Properties.Settings.Default;
 
                     settings.WorkTime = new TimeSpan(0, WorkTimeMinutes, WorkTimeSeconds);
                     settings.RestTime = new TimeSpan(0, RestTimeMinutes, RestTimeSeconds);
