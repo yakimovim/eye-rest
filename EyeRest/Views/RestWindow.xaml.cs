@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace EyeRest
+namespace EyeRest.Views
 {
     /// <summary>
     /// Interaction logic for RestWindow.xaml

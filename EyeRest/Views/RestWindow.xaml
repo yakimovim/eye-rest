@@ -1,9 +1,9 @@
-﻿<Window x:Class="EyeRest.RestWindow"
+﻿<Window x:Class="EyeRest.Views.RestWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True"
-        Icon="Images/MainIcon.ico"
-        Title="Отдохните от работы" Height="150" Width="400" KeyDown="OnKeyDown">
+        Icon="../Images/MainIcon.ico"
+        Title="{DynamicResource TakeRest}" Height="150" Width="400" KeyDown="OnKeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -14,11 +14,10 @@
         </ProgressBar>
         <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
             <TextBlock Margin="2" Text="{Binding SecondsToEnd}" />
-            <TextBlock Margin="2">секунд до конца</TextBlock>
+            <TextBlock Margin="2" Text="{DynamicResource SecondsToEnd}" />
         </StackPanel>
         <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                Width="200" Height="30" Margin="10" Command="{Binding CancelCommand}">
-            Отмена
-        </Button>
+                Width="200" Height="30" Margin="10" Command="{Binding CancelCommand}"
+                Content="{DynamicResource Cancel}" />
     </Grid>
 </Window>

@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="SettingsWindowTitle">"Eye rest" program settings</v:String>
+    <v:String x:Key="InterfaceLanguage">Interface language:</v:String>
+    <v:String x:Key="Minutes">minutes</v:String>
+    <v:String x:Key="Seconds">seconds</v:String>
+    <v:String x:Key="WorkDuration">Time between rest intervals:</v:String>
+    <v:String x:Key="RestDuration">Rest interval duration:</v:String>
+    <v:String x:Key="Ok">OK</v:String>
+    <v:String x:Key="Cancel">Cancel</v:String>
+    <v:String x:Key="TakeRest">Have a rest</v:String>
+    <v:String x:Key="SecondsToEnd">seconds to end</v:String>
+</ResourceDictionary>

@@ -10,7 +10,7 @@ namespace EyeRest.ViewModels
     internal abstract class ViewModel<TControl> : INotifyPropertyChanged
         where TControl : Control
     {
-        protected readonly TControl m_Control;
+        protected readonly TControl _control;
 
         /// <summary>
         /// Occurs on change of some property.
@@ -27,7 +27,7 @@ namespace EyeRest.ViewModels
             if( control == null )
                 throw new ArgumentNullException("control");
 
-            m_Control = control;
+            _control = control;
         }
 
         /// <summary>

@@ -5,8 +5,9 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using EyeRest.ViewModels;
+using EyeRest.Views;
 
-namespace EyeRest
+namespace EyeRest.Model
 {
     interface ITimerState : IDisposable
     {
@@ -112,9 +113,9 @@ namespace EyeRest
 
     class RestState : TimerState
     {
-        private RestWindow[] m_Windows;
+        private RestWindow[] _restWindows;
 
-        public int TotalSeconds { get; private set; }
+        public int TotalSeconds { get; }
 
         public int Seconds { get; private set; }
 
@@ -137,9 +138,9 @@ namespace EyeRest
         {
             TotalSeconds = SecondsToEnd;
 
-            m_Windows = GetRestWindows();
+            _restWindows = GetRestWindows();
 
-            foreach (var window in m_Windows)
+            foreach (var window in _restWindows)
             {
                 window.Closed += OnRestWindowClosed;
                 window.DataContext = this;
@@ -185,14 +186,14 @@ namespace EyeRest
         {
             CloseAllRestWindows();
 
-            var newState = new WorkState(EyeRest.Properties.Settings.Default.WorkTime);
+            var newState = new WorkState(Properties.Settings.Default.WorkTime);
 
             OnNewStateGenerated(newState);
         }
 
         private void CloseAllRestWindows()
         {
-            foreach (var window in m_Windows)
+            foreach (var window in _restWindows)
             {
                 window.Closed -= OnRestWindowClosed;
                 window.Close();

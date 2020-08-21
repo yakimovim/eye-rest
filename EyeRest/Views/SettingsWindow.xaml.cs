@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using EyeRest.ViewModels;
 
-namespace EyeRest
+namespace EyeRest.Views
 {
     public partial class SettingsWindow : Window
     {

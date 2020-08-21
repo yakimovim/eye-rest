@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Input;
+using EyeRest.Model;
+using EyeRest.Views;
 
 namespace EyeRest.ViewModels
 {
     class SettingsViewModel : ViewModel<SettingsWindow>
     {
-        private int m_WorkTimeMinutes;
-        private int m_WorkTimeSeconds;
-        private int m_RestTimeMinutes;
-        private int m_RestTimeSeconds;
+        private int _workTimeMinutes;
+        private int _workTimeSeconds;
+        private int _restTimeMinutes;
+        private int _restTimeSeconds;
+        private int _languageIndex;
 
         public SettingsViewModel(SettingsWindow window) : base(window)
         {
             var settings = Properties.Settings.Default;
 
-            m_WorkTimeMinutes = settings.WorkTime.Minutes;
-            m_WorkTimeSeconds = settings.WorkTime.Seconds;
-            m_RestTimeMinutes = settings.RestTime.Minutes;
-            m_RestTimeSeconds = settings.RestTime.Seconds;
+            _workTimeMinutes = settings.WorkTime.Minutes;
+            _workTimeSeconds = settings.WorkTime.Seconds;
+            _restTimeMinutes = settings.RestTime.Minutes;
+            _restTimeSeconds = settings.RestTime.Seconds;
+
+            _languageIndex = settings.Language;
         }
 
         /// <summary>
@@ -27,13 +32,13 @@ namespace EyeRest.ViewModels
         public int WorkTimeMinutes
         {
             [DebuggerStepThrough]
-            get { return m_WorkTimeMinutes; }
+            get { return _workTimeMinutes; }
             [DebuggerStepThrough]
             set
             {
-                if (m_WorkTimeMinutes != value)
+                if (_workTimeMinutes != value)
                 {
-                    m_WorkTimeMinutes = value;
+                    _workTimeMinutes = value;
 
                     OnPropertyChanged("WorkTimeMinutes");
                 }
@@ -46,13 +51,13 @@ namespace EyeRest.ViewModels
         public int WorkTimeSeconds
         {
             [DebuggerStepThrough]
-            get { return m_WorkTimeSeconds; }
+            get { return _workTimeSeconds; }
             [DebuggerStepThrough]
             set
             {
-                if (m_WorkTimeSeconds != value)
+                if (_workTimeSeconds != value)
                 {
-                    m_WorkTimeSeconds = value;
+                    _workTimeSeconds = value;
 
                     OnPropertyChanged("WorkTimeSeconds");
                 }
@@ -64,13 +69,13 @@ namespace EyeRest.ViewModels
         public int RestTimeMinutes
         {
             [DebuggerStepThrough]
-            get { return m_RestTimeMinutes; }
+            get { return _restTimeMinutes; }
             [DebuggerStepThrough]
             set
             {
-                if (m_RestTimeMinutes != value)
+                if (_restTimeMinutes != value)
                 {
-                    m_RestTimeMinutes = value;
+                    _restTimeMinutes = value;
 
                     OnPropertyChanged("RestTimeMinutes");
                 }
@@ -83,15 +88,36 @@ namespace EyeRest.ViewModels
         public int RestTimeSeconds
         {
             [DebuggerStepThrough]
-            get { return m_RestTimeSeconds; }
+            get { return _restTimeSeconds; }
             [DebuggerStepThrough]
             set
             {
-                if (m_RestTimeSeconds != value)
+                if (_restTimeSeconds != value)
                 {
-                    m_RestTimeSeconds = value;
+                    _restTimeSeconds = value;
 
                     OnPropertyChanged("RestTimeSeconds");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets index of interface language.
+        /// </summary>
+        public int LanguageIndex
+        {
+            [DebuggerStepThrough]
+            get { return _languageIndex; }
+            [DebuggerStepThrough]
+            set
+            {
+                if (_languageIndex != value)
+                {
+                    _languageIndex = value;
+
+                    Language.SetCulture(value);
+
+                    OnPropertyChanged("LanguageIndex");
                 }
             }
         }
@@ -110,9 +136,13 @@ namespace EyeRest.ViewModels
                     settings.WorkTime = new TimeSpan(0, WorkTimeMinutes, WorkTimeSeconds);
                     settings.RestTime = new TimeSpan(0, RestTimeMinutes, RestTimeSeconds);
 
+                    settings.Language = LanguageIndex;
+
                     settings.Save();
 
-                    m_Control.Close();
+                    Language.SetCulture(LanguageIndex);
+
+                    _control.Close();
                 });
             }
         }
@@ -126,7 +156,11 @@ namespace EyeRest.ViewModels
             {
                 return new RelayCommand(delegate
                 {
-                    m_Control.Close();
+                    var settings = Properties.Settings.Default;
+
+                    Language.SetCulture(settings.Language);
+
+                    _control.Close();
                 });
             }
         }

@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="SettingsWindowTitle">Настройки программы "Отдых для глаз"</v:String>
+    <v:String x:Key="InterfaceLanguage">Язык интерфейса:</v:String>
+    <v:String x:Key="Minutes">минут</v:String>
+    <v:String x:Key="Seconds">секунд</v:String>
+    <v:String x:Key="WorkDuration">Время между перерывами для отдыха:</v:String>
+    <v:String x:Key="RestDuration">Длительность перерыва для отдыха:</v:String>
+    <v:String x:Key="Ok">ОК</v:String>
+    <v:String x:Key="Cancel">Отмена</v:String>
+    <v:String x:Key="TakeRest">Отдохните от работы</v:String>
+    <v:String x:Key="SecondsToEnd">секунд до конца</v:String>
+</ResourceDictionary>

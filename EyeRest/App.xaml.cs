@@ -1,30 +1,35 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Forms;
+using EyeRest.Model;
+using EyeRest.Properties;
+using EyeRest.Views;
 
 namespace EyeRest
 {
     public partial class App : System.Windows.Application
     {
-        private NotifyIcon m_TrayIcon;
-        private ToolStripMenuItem m_PauseItem;
-        private Timer m_Timer;
+        private NotifyIcon _trayIcon;
+        private ToolStripMenuItem _pauseItem;
+        private Timer _timer;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
+            Language.SetCulture(Settings.Default.Language);
+
             ShowTrayIcon();
 
-            m_Timer = new Timer();
+            _timer = new Timer();
         }
 
         protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
         {
             base.OnSessionEnding(e);
 
-            m_Timer.Dispose();
-            m_Timer = null;
+            _timer.Dispose();
+            _timer = null;
         }
 
         /// <summary>
@@ -32,7 +37,7 @@ namespace EyeRest
         /// </summary>
         private void ShowTrayIcon()
         {
-            m_TrayIcon = new NotifyIcon
+            _trayIcon = new NotifyIcon
             {
                 BalloonTipIcon = ToolTipIcon.Info,
                 BalloonTipTitle = EyeRest.Properties.Resources.TrayIconTooltipTitle,
@@ -40,28 +45,50 @@ namespace EyeRest
                 Text = EyeRest.Properties.Resources.TrayIconTooltipTitle,
                 Icon = EyeRest.Properties.Resources.MainIcon
             };
-            m_TrayIcon.ShowBalloonTip(1000);
+            _trayIcon.ShowBalloonTip(1000);
 
-            m_PauseItem = new ToolStripMenuItem(EyeRest.Properties.Resources.TrayMenuSuspend, null, OnSuspendResume) { Tag = true };
+            _pauseItem = new ToolStripMenuItem(EyeRest.Properties.Resources.TrayMenuSuspend, null, OnSuspendResume) { Tag = true };
+            var settingsItem = new ToolStripMenuItem(EyeRest.Properties.Resources.TrayMenuShowSettings, null, OnShowSettings);
+            var exitItem = new ToolStripMenuItem(EyeRest.Properties.Resources.TrayMenuExitText, null, OnExit);
 
             var trayMenu = new ContextMenuStrip { ShowImageMargin = false, ShowCheckMargin = false };
-            trayMenu.Items.Add(EyeRest.Properties.Resources.TrayMenuShowSettings, null, OnShowSettings);
-            trayMenu.Items.Add(m_PauseItem);
+
+            trayMenu.Items.Add(settingsItem);
+            trayMenu.Items.Add(_pauseItem);
             trayMenu.Items.Add("-");
-            trayMenu.Items.Add(EyeRest.Properties.Resources.TrayMenuExitText, null, OnExit);
-            m_TrayIcon.ContextMenuStrip = trayMenu;
+            trayMenu.Items.Add(exitItem);
+            _trayIcon.ContextMenuStrip = trayMenu;
 
-            m_TrayIcon.MouseUp += OnTrayIconClick;
+            _trayIcon.MouseUp += OnTrayIconClick;
 
-            m_TrayIcon.Visible = true;
+            _trayIcon.Visible = true;
+
+            void SetTrayMenuTexts()
+            {
+                _trayIcon.BalloonTipTitle = EyeRest.Properties.Resources.TrayIconTooltipTitle;
+                _trayIcon.BalloonTipText = EyeRest.Properties.Resources.TrayIconTooltipText;
+                _trayIcon.Text = EyeRest.Properties.Resources.TrayIconTooltipTitle;
+
+                _pauseItem.Text = _pauseItem.Tag is true
+                    ? EyeRest.Properties.Resources.TrayMenuSuspend
+                    : EyeRest.Properties.Resources.TrayMenuResume;
+
+                settingsItem.Text = EyeRest.Properties.Resources.TrayMenuShowSettings;
+
+                exitItem.Text = EyeRest.Properties.Resources.TrayMenuExitText;
+            }
+
+            SetTrayMenuTexts();
+
+            Language.OnChange += (object sender, EventArgs e) => { SetTrayMenuTexts(); };
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
 
-            if (m_TrayIcon != null)
-                m_TrayIcon.Visible = false;
+            if (_trayIcon != null)
+                _trayIcon.Visible = false;
         }
 
         /// <summary>
@@ -85,28 +112,28 @@ namespace EyeRest
         /// </summary>
         private void OnSuspendResume(object sender, EventArgs args)
         {
-            bool state = (bool)m_PauseItem.Tag;
+            bool state = (bool)_pauseItem.Tag;
 
             if (state)
             {
-                m_PauseItem.Text = EyeRest.Properties.Resources.TrayMenuResume;
+                _pauseItem.Text = EyeRest.Properties.Resources.TrayMenuResume;
 
-                m_Timer.Suspend();
+                _timer.Suspend();
             }
             else
             {
-                m_PauseItem.Text = EyeRest.Properties.Resources.TrayMenuSuspend;
+                _pauseItem.Text = EyeRest.Properties.Resources.TrayMenuSuspend;
 
-                m_Timer.Resume();
+                _timer.Resume();
             }
 
-            m_PauseItem.Tag = !state;
+            _pauseItem.Tag = !state;
         }
 
         /// <summary>
         /// Handles click on tray icon to open window with settings.
         /// </summary>
-        private static void OnTrayIconClick(object sender, System.Windows.Forms.MouseEventArgs args)
+        private static void OnTrayIconClick(object sender, MouseEventArgs args)
         {
             if (args.Button == MouseButtons.Left)
             { OnShowSettings(sender, args); }

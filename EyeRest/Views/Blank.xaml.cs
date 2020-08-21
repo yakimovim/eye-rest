@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace EyeRest
+namespace EyeRest.Views
 {
     public partial class Blank : Window
     {

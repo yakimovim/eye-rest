@@ -19,7 +19,7 @@ namespace EyeRest.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -81,7 +81,7 @@ namespace EyeRest.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Эта программа через регулярные интервалы времени напоминает вам о необходимости дать глазам отдых.
+        ///   Looks up a localized string similar to This program reminds you to rest your eyes at regular intervals.
         /// </summary>
         internal static string TrayIconTooltipText {
             get {
@@ -90,7 +90,7 @@ namespace EyeRest.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Отдых для глаз.
+        ///   Looks up a localized string similar to Rest for the eyes.
         /// </summary>
         internal static string TrayIconTooltipTitle {
             get {
@@ -99,7 +99,7 @@ namespace EyeRest.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Закрыть программу.
+        ///   Looks up a localized string similar to Close the program.
         /// </summary>
         internal static string TrayMenuExitText {
             get {
@@ -108,7 +108,7 @@ namespace EyeRest.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Возобновить.
+        ///   Looks up a localized string similar to Resume.
         /// </summary>
         internal static string TrayMenuResume {
             get {
@@ -117,7 +117,7 @@ namespace EyeRest.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Настройки....
+        ///   Looks up a localized string similar to Settings....
         /// </summary>
         internal static string TrayMenuShowSettings {
             get {
@@ -126,7 +126,7 @@ namespace EyeRest.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Приостановить.
+        ///   Looks up a localized string similar to Suspend.
         /// </summary>
         internal static string TrayMenuSuspend {
             get {

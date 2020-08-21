@@ -1,0 +1,66 @@
+﻿<Window x:Class="EyeRest.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Icon="../Images/MainIcon.ico"
+        Title="{DynamicResource SettingsWindowTitle}" 
+        Height="200" Width="500">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="80"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="40"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="100"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource InterfaceLanguage}" />
+        <ComboBox Grid.Row="0" Grid.Column="1" SelectedIndex="{Binding LanguageIndex, Mode=TwoWay}">
+            <ComboBoxItem IsSelected="True">English</ComboBoxItem>
+            <ComboBoxItem>Русский</ComboBoxItem>
+        </ComboBox>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource WorkDuration}" />
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBox Text="{Binding WorkTimeMinutes, Mode=TwoWay}" />
+            <TextBlock Text="{DynamicResource Minutes}" />
+            <TextBox Text="{Binding WorkTimeSeconds, Mode=TwoWay}" />
+            <TextBlock Text="{DynamicResource Seconds}"/>
+        </StackPanel>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource RestDuration}" />
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBox Text="{Binding RestTimeMinutes, Mode=TwoWay}" />
+            <TextBlock Text="{DynamicResource Minutes}"/>
+            <TextBox Text="{Binding RestTimeSeconds, Mode=TwoWay}" />
+            <TextBlock Text="{DynamicResource Seconds}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
+            <Button Command="{Binding OkCommand}" Content="{DynamicResource Ok}" />
+            <Button Command="{Binding CancelCommand}" Content="{DynamicResource Cancel}" />
+        </StackPanel>
+    </Grid>
+</Window>

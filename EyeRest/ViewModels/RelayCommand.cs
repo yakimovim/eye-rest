@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using EyeRest.Properties;
 
 namespace EyeRest.ViewModels
 {
@@ -9,8 +8,8 @@ namespace EyeRest.ViewModels
     /// </summary>
     internal class RelayCommand : ICommand
     {
-        private readonly Action<object> m_Execute;
-        private readonly Func<object, bool> m_CanExecute;
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand"/> class.
@@ -23,8 +22,8 @@ namespace EyeRest.ViewModels
             if (execute == null)
                 throw new ArgumentNullException("execute");
 
-            m_Execute = execute;
-            m_CanExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace EyeRest.ViewModels
         public bool CanExecute(object parameter)
         {
 
-            return m_CanExecute != null ? m_CanExecute(parameter) : true;
+            return _canExecute != null ? _canExecute(parameter) : true;
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace EyeRest.ViewModels
         /// <param name="parameter">Command's parameter.</param>
         public void Execute(object parameter)
         {
-            m_Execute(parameter);
+            _execute(parameter);
         }
     }
 }
